@@ -1,0 +1,22 @@
+{
+  "name": "todolist-v1",
+  "version": "1.0.0",
+  "description": "Simple ToDo list app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ratiphi/todolist-v1.git"
+  },
+  "author": "Tim Turner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ratiphi/todolist-v1/issues"
+  },
+  "homepage": "https://github.com/ratiphi/todolist-v1#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

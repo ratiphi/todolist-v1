@@ -1,22 +1,21 @@
 const express = require("express");
 const app = express();
+let items = ["Buy food", "Cook food", "Eat food"];
 
 app.set('view engine', 'ejs');
-
-var items = ["Buy food", "Cook food", "Eat food"];
-
+app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({
     extended: true
 }));
 
 app.get("/", function (req, res) {
-    var today = new Date();
-    var options = {
+    let today = new Date();
+    let options = {
         weekday: "long",
         day: "numeric",
         month: "long"
     };
-    var currentDay = today.toLocaleDateString("en-US", options);
+    let currentDay = today.toLocaleDateString("en-US", options);
 
     res.render("list", {
         day: currentDay,
@@ -25,7 +24,7 @@ app.get("/", function (req, res) {
 });
 
 app.post("/", function (req, res) {
-    var item = req.body.newItem;
+    let item = req.body.newItem;
     items.push(item);
     //console.log(item);
     res.redirect("/");

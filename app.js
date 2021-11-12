@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
-let items = ["Buy food", "Cook food", "Eat food"];
-
+const date = require(__dirname + "/date.js");
+const items = ["Buy food"];
+const workItems = ["Check email"];
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({
@@ -9,18 +10,24 @@ app.use(express.urlencoded({
 }));
 
 app.get("/", function (req, res) {
-    let today = new Date();
-    let options = {
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-    };
-    let currentDay = today.toLocaleDateString("en-US", options);
-
+    let currentDay = date.getDate();
     res.render("list", {
-        day: currentDay,
-        itemList: items
+        listTitle: currentDay,
+        itemList: items,
+        route: "/"
     });
+});
+
+app.get("/work", function (req, res) {
+    res.render("list", {
+        listTitle: "Work List",
+        itemList: workItems,
+        route: "/work"
+    });
+});
+
+app.get("/about", function (req, res) {
+    res.render("about");
 });
 
 app.post("/", function (req, res) {
@@ -28,6 +35,13 @@ app.post("/", function (req, res) {
     items.push(item);
     //console.log(item);
     res.redirect("/");
+});
+
+app.post("/work", function (req, res) {
+    let item = req.body.newItem;
+    workItems.push(item);
+    //console.log(item);
+    res.redirect("/work");
 });
 
 app.listen(3000, function () {
